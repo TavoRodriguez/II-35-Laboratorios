@@ -20,7 +20,7 @@ public class Lab2 {
         // TODO code application logic here
         try {
             String[] nombres = new String[3];
-            int[] numeros = new int [3]; //Indico el tamaño del arreglo que es  posiciones
+            int[] numeros; //Indico el tamaño del arreglo que es  posiciones
             //numeros [0] = 10;
             //numeros [1] = 20;
             //numeros [2] = 30/0;
@@ -29,9 +29,22 @@ public class Lab2 {
             //System.out.println(Arrays.toString(numeros));
             
             // 1. preguntar tamaño del arreglo 
-            String size = JOptionPane.showInputDialog("Ingrese el tamaño del arreglo");
+            int size = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el tamaño del arreglo"));
+            //se valida que el tamaño no sea mayor que 10
+            while (size > 10) {
+                JOptionPane.showMessageDialog(null, "El valor debe ser menor que 10 ");
+                size = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el tamaño del arreglo"));
+                
+            }
             // 2. inicializar el arreglo con el tamaño 
+            numeros = new int [size];
             // 3. llenar el arreglo 
+            for (int i = 0; i < numeros.length; i++) {
+                String valor = JOptionPane.showInputDialog("Ingrese el valor del index " + i);
+                int intValor = Integer.parseInt(valor);
+                numeros[i] = intValor; 
+                
+            }
             
             
             JOptionPane.showMessageDialog(null, Arrays.toString(numeros));
