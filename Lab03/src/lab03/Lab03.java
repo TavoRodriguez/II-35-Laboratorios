@@ -6,6 +6,7 @@ package lab03;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import poo.Carretera;
 import poo.Carro;
 import poo.Garaje;
 /**
@@ -33,6 +34,12 @@ public class Lab03 {
         miGaraje.aparcarCarro(c1);
         miGaraje.aparcarCarro(c2);
         miGaraje.aparcarCarro(c1);
+        
+        Carretera c = new Carretera("General Cañas");
+        c.agregarCarro(c1);
+        c.agregarCarro(c2);
+        c.listarCarros();
+        c.removerCarrosAntiguos();
     
     }
     
