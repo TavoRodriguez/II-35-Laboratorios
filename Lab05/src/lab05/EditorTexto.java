@@ -4,59 +4,51 @@
  */
 package lab05;
 
-import java.util.Scanner;
-import java.util.Stack; //Stack Clase de java para hacer una pila
+import java.util.Stack;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author fbarg
- */
 public class EditorTexto {
 
     private final Stack<String> acciones = new Stack<>();
     private final Stack<String> accionesUndo = new Stack<>();
 
-    public void escribir(String texto) {
-        acciones.push(texto);
-        System.out.println("Escribiendo: " + texto);
+   public void escribir(String texto) {
+    acciones.push(texto);
+    // cada vez que escribes algo nuevo, las posibilidades de "rehacer" anteriores se invalidan
+    accionesUndo.clear();
+    JOptionPane.showMessageDialog(null, "Escribiendo: " + texto);
+}
+
+public void deshacer() {
+    if (acciones.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay acciones para deshacer.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
 
-//    public void deshacer() {
-//        if (!acciones.isEmpty()) {
-//            String textDeshecho = acciones.pop();
-//            acciones.add(textDeshecho);
-//            System.out.println("Deshaciendo: " + textDeshecho);
-//        } else {
-//            System.err.println("No hay acciones para deshacer.");
-//        }
-//    }
-    public void deshacer() {
+    String textDeshecho = acciones.pop();
+    // guardo lo deshecho en la pila de undo/rehacer
+    accionesUndo.push(textDeshecho);
+    JOptionPane.showMessageDialog(null, "Deshaciendo: " + textDeshecho);
+}
 
-        if (acciones.isEmpty()) {
-            System.err.println("No hay acciones para deshacer.");
-            return;
-        }
-
-        String textDeshecho = acciones.pop();
-        acciones.add(textDeshecho);
-        System.out.println("Deshaciendo: " + textDeshecho);
+public void rehacer() {
+    if (accionesUndo.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "No hay acciones para rehacer.");
+        return;
     }
+    String texto = accionesUndo.pop();
+    // lo vuelvo a aplicar en acciones
+    acciones.push(texto);
+    JOptionPane.showMessageDialog(null, "Rehaciendo: " + texto);
+}
 
-    public void rehacer() {
-        if (accionesUndo.isEmpty()) {
-            return;
-        }
-        String texto = accionesUndo.pop();
-        System.out.println("Rehaciendo: " + texto);
-        escribir(texto);
-    }
 
     public void Imprimir() {
-        String salida = "";
+        StringBuilder salida = new StringBuilder();
         for (String accion : acciones) {
-            salida += accion;
+            salida.append(accion);
         }
-        System.out.println(salida);
+        JOptionPane.showMessageDialog(null, "Texto actual:\n" + salida.toString());
     }
 
     public int size() {
@@ -65,6 +57,7 @@ public class EditorTexto {
 
     public static void main(String[] args) {
         EditorTexto et = new EditorTexto();
+
         et.escribir("Hola ");
         et.escribir("Mundo ");
         et.escribir("Bienvenidos a ");
@@ -72,18 +65,21 @@ public class EditorTexto {
         et.escribir("en ");
         et.escribir("Java");
 
-        System.out.println("Acciones: " + et.size());
+        JOptionPane.showMessageDialog(null, "Acciones iniciales: " + et.size());
 
         et.deshacer();
         et.deshacer();
-        System.out.println("Acciones: " + et.size());
+        JOptionPane.showMessageDialog(null, "Acciones tras deshacer: " + et.size());
 
-        Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Ingrese el texto a escribir");
-            String texto = scanner.next();
+            String texto = JOptionPane.showInputDialog(
+                    null,
+                    "Ingrese el texto a escribir\n"
+                    + "(!q para salir, !p imprimir, !u deshacer, !r rehacer)"
+            );
 
-            if (texto.contains("!q")) {
+            if (texto == null || texto.contains("!q")) {
+                JOptionPane.showMessageDialog(null, "Programa finalizado.");
                 return;
             }
 
@@ -103,8 +99,7 @@ public class EditorTexto {
             }
 
             et.escribir(texto);
-            System.out.println("Size:" + et.size());
-
+            JOptionPane.showMessageDialog(null, "Total acciones: " + et.size());
         }
     }
 }
