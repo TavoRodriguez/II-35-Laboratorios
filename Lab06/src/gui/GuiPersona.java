@@ -5,22 +5,22 @@
 package gui;
 
 import javax.swing.JOptionPane;
-import lab06.Carro;
 import lab06.ColaCarros;
-
+import lab06.Persona;
+import lab06.ColaPersona;
 /**
  *
  * @author grnar
  */
-public class GuiColas extends javax.swing.JFrame {
+public class GuiPersona extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GuiColas.class.getName());
-    private static ColaCarros cola = new ColaCarros();
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GuiPersona.class.getName());
+    private static ColaPersona cola = new ColaPersona();
 
     /**
-     * Creates new form GuiColas
+     * Creates new form GuiPersona
      */
-    public GuiColas() {
+    public GuiPersona() {
         initComponents();
     }
 
@@ -34,32 +34,38 @@ public class GuiColas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
-        btnAtender = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JTextField();
+        lblCapacidad = new javax.swing.JLabel();
+        spCapacidad = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        cbxMarcas = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtPlaca = new javax.swing.JTextField();
-        spCapacidad = new javax.swing.JSpinner();
-        lblCantidad = new javax.swing.JLabel();
-        lblCapacidad = new javax.swing.JLabel();
         txtActual = new javax.swing.JTextField();
+        btnAtender = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        lblCantidad = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LAVACAR CHESPIRITOS");
+        setTitle("Auto Mac");
 
-        jLabel1.setText("Marca");
+        jLabel1.setText("Nombre");
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Apellido");
+
+        jLabel3.setText("Cedula");
+
+        lblCapacidad.setText("Capacidad");
+
+        spCapacidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        spCapacidad.setValue(1);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         btnAtender.setText("Atender");
         btnAtender.addActionListener(new java.awt.event.ActionListener() {
@@ -68,24 +74,16 @@ public class GuiColas extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        cbxMarcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toyota", "Kia", "Hyundai", "Suzuki" }));
-
-        jLabel2.setText("Modelo");
-
-        jLabel3.setText("Placa");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Cantidad");
 
-        spCapacidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        spCapacidad.setValue(1);
-
         lblCantidad.setText("0");
-
-        lblCapacidad.setText("Capacidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,15 +111,15 @@ public class GuiColas extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtModelo)
-                                    .addComponent(cbxMarcas, 0, 112, Short.MAX_VALUE)
-                                    .addComponent(txtPlaca))
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                    .addComponent(txtCedula)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
                                 .addGap(70, 70, 70)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblCantidad))
                             .addComponent(txtActual, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(87, Short.MAX_VALUE))))
+                        .addContainerGap(198, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,12 +127,12 @@ public class GuiColas extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbxMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(lblCantidad))
+                    .addComponent(lblCantidad)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -143,7 +141,7 @@ public class GuiColas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAgregar))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -158,37 +156,46 @@ public class GuiColas extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
-
-        jLabel1.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if ((int)spCapacidad.getValue() == cola.size()) {
-            JOptionPane.showMessageDialog(null, "La capacidad esta al maximo");
-            return;
-        }
-        String placa = txtPlaca.getText();
-        String modelo = txtModelo.getText();
-        String marca = cbxMarcas.getSelectedItem().toString();
-        Carro c = new Carro(marca, modelo, placa);
-        cola.addCarro(c);
-        actualizarComponentes();
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
-        Carro actual = cola.pollCarro();
-        if (actual == null) {
-            JOptionPane.showMessageDialog(null, "No hay nadie a quien atender");
-            return;
-        }
-        actualizarComponentes();
-        txtActual.setText(actual.toString());
-        
+
+    Persona actual = cola.pollPersona();
+
+    if (actual == null) {
+        JOptionPane.showMessageDialog(null, "No hay ninguna persona en la fila");
+        return;
+    }
+    actualizarComponentes();
+    txtActual.setText(actual.toString());
     }//GEN-LAST:event_btnAtenderActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+    if ((int) spCapacidad.getValue() == cola.size()) {
+        JOptionPane.showMessageDialog(null, "La capacidad está al máximo");
+        return;
+    }
+    String nombre = txtNombre.getText().trim();
+    String apellido = txtApellido.getText().trim();
+    String cedula = txtCedula.getText().trim();
+    if (nombre.isEmpty() || apellido.isEmpty() || cedula.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+        return;
+    }
+    Persona p = new Persona(nombre, apellido, cedula);
+    cola.addPersona(p);
+    actualizarComponentes();
+
+    txtNombre.setText("");
+    txtApellido.setText("");
+    txtCedula.setText("");
+    txtNombre.requestFocus();
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,13 +219,12 @@ public class GuiColas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GuiColas().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GuiPersona().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtender;
-    private javax.swing.JComboBox<String> cbxMarcas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -229,12 +235,13 @@ public class GuiColas extends javax.swing.JFrame {
     private javax.swing.JLabel lblCapacidad;
     private javax.swing.JSpinner spCapacidad;
     private javax.swing.JTextField txtActual;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtPlaca;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-    private void actualizarComponentes() {
+        private void actualizarComponentes() {
        jTextArea1.setText(cola.listar());
        lblCantidad.setText(cola.size()+ "");
     }
+
 }
