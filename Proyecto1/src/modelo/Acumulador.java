@@ -70,13 +70,13 @@ public class Acumulador {
         Operacion op = pilaRedo.pop();
 
         // Apilar la operación original nuevamente en pilaUndo
-        pilaUndo.push(op);
+        pilaUndo.push(op.inversa());
 
         // Recalcular total
         recalcularTotal();
     }
 
-    // puede ser positivo o negativo
+
     public void aplicar(Operacion valor) {
         // Tras un undo y una nueva operación, la pilaRedo debe vaciarse
         if (!pilaRedo.isEmpty()) {
